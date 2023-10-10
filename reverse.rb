@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require 'test/unit'
 
 def reverse(list)
   reversed_list = []
@@ -12,7 +12,7 @@ def reverse(list)
   reversed_list
 end
 
-class TestReverse < MiniTest::Test
+class TestReverse < Test::Unit::TestCase
   def test_reverse_array_happy_path
     array = [1, 2, 3, 4, 5]
     expected = [5, 4, 3, 2, 1]

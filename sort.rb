@@ -4,7 +4,7 @@ require 'test/unit'
 def sort(array)
   return array if array.size <= 1
 
-  move = false
+  move = true
   index = 0
 
   while move do
@@ -12,15 +12,22 @@ def sort(array)
       current = array[index]
       next_item = array[index + 1]
 
+      break if next_item.nil?
+
       if current > next_item
         array[index] = next_item
         array[index + 1] = current
+        move = true
+      else
+        move = false
       end
 
       index += 1
     end
     index = 0
   end
+
+  array
 end
 
 class TestSort < Test::Unit::TestCase

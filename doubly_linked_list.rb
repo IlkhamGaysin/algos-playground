@@ -1,4 +1,15 @@
 class DoublyLinkedList
+  class Node
+    attr_reader :value, :next_node, :previous_node
+    attr_accessor :next_node, :previous_node
+
+    def initialize(value, next_node, previous_node)
+      @value = value
+      @next_node = next_node
+      @previous_node = previous_node
+    end
+  end
+
   attr_reader :head, :tail, :size
 
   def initialize
@@ -13,13 +24,12 @@ class DoublyLinkedList
 
     if @head.nil?
       @head = new_node
-      @tail = @head
     else
-      new_node = new_node
       @tail.next_node = new_node
       new_node.previous_node = @tail
-      @tail = new_node
     end
+
+    @tail = new_node
 
     @size += 1
 
@@ -93,82 +103,71 @@ class DoublyLinkedList
   end
 end
 
-class Node
-  attr_reader :value, :next_node, :previous_node
-  attr_accessor :next_node, :previous_node
-
-  def initialize(value, next_node, previous_node)
-    @value = value
-    @next_node = next_node
-    @previous_node = previous_node
-  end
-end
-
 require 'test/unit'
 
-class TestLinkedList < Test::Unit::TestCase
+class TestDoublyLinkedList < Test::Unit::TestCase
   def test_insert_and_size
-    list = DoublyLinkedList.new
-    assert_equal(0, list.size)
+    doubly_list = DoublyLinkedList.new
+    assert_equal(0, doubly_list.size)
 
-    list.insert(10)
-    assert_equal(1, list.size)
+    doubly_list.insert(10)
+    assert_equal(1, doubly_list.size)
 
-    list.insert(20)
-    assert_equal(2, list.size)
+    doubly_list.insert(20)
+    assert_equal(2, doubly_list.size)
   end
 
   def test_empty_list
-    list = DoublyLinkedList.new
-    assert_nil(list.head)
-    assert_nil(list.tail)
-    assert_equal(0, list.size)
+    doubly_list = DoublyLinkedList.new
+    assert_nil(doubly_list.head)
+    assert_nil(doubly_list.tail)
+    assert_equal(0, doubly_list.size)
   end
 
   def test_delete
-    list = DoublyLinkedList.new
-    list.insert(10)
-    list.insert(20)
-    list.insert(30)
+    doubly_list = DoublyLinkedList.new
+    doubly_list.insert(10)
+    doubly_list.insert(20)
+    doubly_list.insert(30)
 
-    assert_equal(3, list.size)
-    assert_equal(10, list.head.value)
-    assert_equal(30, list.tail.value)
-    assert_equal(20, list.head.next_node.value)
-    assert_equal(20, list.tail.previous_node.value)
+    assert_equal(3, doubly_list.size)
+    assert_equal(10, doubly_list.head.value)
+    assert_equal(30, doubly_list.tail.value)
+    assert_equal(20, doubly_list.head.next_node.value)
+    assert_equal(20, doubly_list.tail.previous_node.value)
 
     # delete from middle
-    list.delete(20)
-    assert_equal(2, list.size)
-    assert_equal(10, list.head.value)
-    assert_equal(30, list.tail.value)
-    assert_equal(30, list.head.next_node.value)
-    assert_equal(10, list.tail.previous_node.value)
+    doubly_list.delete(20)
+    assert_equal(2, doubly_list.size)
+    assert_equal(10, doubly_list.head.value)
+    assert_equal(30, doubly_list.tail.value)
+    assert_equal(30, doubly_list.head.next_node.value)
+    assert_equal(10, doubly_list.tail.previous_node.value)
   end
 
   def test_find
-    list = DoublyLinkedList.new
-    list.insert(10)
-    list.insert(20)
-    list.insert(30)
+    doubly_list = DoublyLinkedList.new
+    doubly_list.insert(10)
+    doubly_list.insert(20)
+    doubly_list.insert(30)
 
-    assert_equal(10, list.find(10).value)
-    assert_equal(20, list.find(20).value)
-    assert_equal(30, list.find(30).value)
+    assert_equal(10, doubly_list.find(10).value)
+    assert_equal(20, doubly_list.find(20).value)
+    assert_equal(30, doubly_list.find(30).value)
   end
 end
 
-list = DoublyLinkedList.new
-list.insert(1)
-list.insert(2)
-list.insert(3)
+doubly_list = DoublyLinkedList.new
+doubly_list.insert(1)
+doubly_list.insert(2)
+doubly_list.insert(3)
 
-p list.size
-p list.head
-p list.tail
-list.delete(3)
+p doubly_list.size
+p doubly_list.head
+p doubly_list.tail
+doubly_list.delete(3)
 
 puts "\n"
-p list.size
-p list.head
-p list.tail
+p doubly_list.size
+p doubly_list.head
+p doubly_list.tail

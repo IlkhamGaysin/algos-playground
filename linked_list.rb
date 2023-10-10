@@ -1,4 +1,14 @@
 class LinkedList
+  class Node
+    attr_reader :value, :next_node
+    attr_accessor :next_node
+
+    def initialize(value, next_node)
+      @value = value
+      @next_node = next_node
+    end
+  end
+
   attr_reader :head, :tail, :size
 
   def initialize
@@ -13,12 +23,11 @@ class LinkedList
 
     if @head.nil?
       @head = new_node
-      @tail = @head
     else
-      new_node = new_node
       @tail.next_node = new_node
-      @tail = new_node
     end
+
+    @tail = new_node
 
     @size += 1
 
@@ -77,16 +86,6 @@ class LinkedList
 
       current_node = current_node.next_node
     end
-  end
-end
-
-class Node
-  attr_reader :value, :next_node
-  attr_accessor :next_node
-
-  def initialize(value, next_node)
-    @value = value
-    @next_node = next_node
   end
 end
 

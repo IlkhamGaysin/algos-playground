@@ -40,6 +40,15 @@ class Stack
   def self.peek
     @head
   end
+
+  def each
+    current_node = @head
+
+    while current_node.next_node do
+      yield(current_node)
+      current_node = current_node.next_node
+    end
+  end
 end
 
 require 'test/unit'
@@ -72,5 +81,22 @@ class TestStack < Test::Unit::TestCase
     assert_equal(2, stack.head.value)
     assert_equal(1, stack.head.next_node.value)
     assert_equal(1, stack.tail.value)
+  end
+
+  def test_each
+    stack = Stack.new
+
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+
+    counter = 0
+
+    stack.each do |node|
+      assert_equal(3, node.value) if counter == 0
+      assert_equal(2, node.value) if counter == 1
+      assert_equal(1, node.value) if counter == 2
+      counter += 1
+    end
   end
 end

@@ -87,6 +87,16 @@ class LinkedList
       current_node = current_node.next_node
     end
   end
+
+  # O(n)
+  def each
+    current_node = @head
+
+    while current_node do
+      yield current_node
+      current_node = current_node.next_node
+    end
+  end
 end
 
 require 'test/unit'
@@ -147,6 +157,18 @@ class TestLinkedList < Test::Unit::TestCase
     assert_equal(10, list.find(10).value)
     assert_equal(20, list.find(20).value)
     assert_equal(30, list.find(30).value)
+  end
+
+  def test_each
+    list = LinkedList.new
+    list.insert(10)
+    list.insert(20)
+    list.insert(30)
+
+    values = []
+    list.each { |node| values << node.value }
+
+    assert_equal([10, 20, 30], values)
   end
 end
 

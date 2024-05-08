@@ -16,6 +16,7 @@ class Stack
     @size = 0
   end
 
+  # O(1)
   def push(value)
     new_node = Node.new(value, @head)
 
@@ -27,6 +28,7 @@ class Stack
     @size += 1
     new_node
   end
+
 
   def pop
     return if @head.nil?

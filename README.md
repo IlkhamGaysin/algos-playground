@@ -1,4 +1,6 @@
 # Algos And Data Structures Playground
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/IlkhamGaysin/algos-playground/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/IlkhamGaysin/algos-playground/tree/main)
+
 This repository contains my solutions to some challenges.
 ## Usage
 1. Install ruby >= 3.0.0
